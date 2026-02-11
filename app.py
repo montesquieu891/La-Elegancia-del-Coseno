@@ -3,14 +3,18 @@ La Elegancia del Coseno - Backend API
 Educational project for teaching cosine similarity
 """
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import numpy as np
 import math
 from collections import Counter
 import json
+import os
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+# Configure Flask to serve static files correctly
+app = Flask(__name__, 
+            static_folder='static',
+            static_url_path='')
 CORS(app)
 
 # ============================================================================
@@ -165,7 +169,12 @@ def calculate_similarity_matrix(vectors):
 @app.route('/')
 def index():
     """Serve the main HTML page"""
-    return send_from_directory('static', 'index.html')
+    return send_file('static/index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    """Serve static files"""
+    return send_file(os.path.join('static', path))
 
 @app.route('/api/cosine', methods=['POST'])
 def calculate_cosine():
