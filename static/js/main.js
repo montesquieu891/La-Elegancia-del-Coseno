@@ -735,7 +735,7 @@ function initModule5_LLMs() {
             <div class="rag-step">
                 <strong>Paso 1: Query → Vector</strong>
                 <p>Tu pregunta: "${query}"</p>
-                <p>Se convierte en un vector de embeddings (ej: 12,288 dimensiones para GPT)</p>
+                <p>Se convierte en un vector de embeddings (ej: dimensiones variables según el modelo)</p>
                 <code style="background: #000; color: #00CC66; padding: 0.5rem; display: block; margin-top: 0.5rem;">
                 query_vector = embed("${query}") → [0.234, -0.891, 0.432, ...]
                 </code>
