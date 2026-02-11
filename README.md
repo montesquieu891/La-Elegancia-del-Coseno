@@ -54,10 +54,33 @@ Cómo Claude/GPT usan esto ahora mismo
 
 ## 🛠️ Instalación
 
+### Método Rápido (Recomendado)
+
+**Linux/Mac:**
+```bash
+git clone https://github.com/montesquieu891/La-Elegancia-del-Coseno.git
+cd La-Elegancia-del-Coseno
+chmod +x run.sh
+./run.sh
+```
+
+**Windows:**
+```cmd
+git clone https://github.com/montesquieu891/La-Elegancia-del-Coseno.git
+cd La-Elegancia-del-Coseno
+run.bat
+```
+
+### Método Manual
+
 ```bash
 # Clonar el repositorio
 git clone https://github.com/montesquieu891/La-Elegancia-del-Coseno.git
 cd La-Elegancia-del-Coseno
+
+# Crear entorno virtual (opcional pero recomendado)
+python3 -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
 
 # Instalar dependencias
 pip install -r requirements.txt
@@ -74,7 +97,6 @@ Luego abre tu navegador en `http://localhost:5000`
 - **Python 3.x** - Lenguaje principal
 - **Flask 3.0.0** - API REST simple
 - **NumPy 1.24.0** - Álgebra lineal pura
-- **Gensim 4.3.0** - Para cargar embeddings preentrenados (opcional)
 - **Flask-CORS 4.0.0** - CORS para frontend
 
 ### Frontend
@@ -87,6 +109,23 @@ Luego abre tu navegador en `http://localhost:5000`
 ### Diseño
 - Paleta: `#FFFFFF` (fondo), `#000000` (texto), `#00CC66` (acentos)
 - Tipografía: System fonts (sin cargas externas)
+
+## 📁 Estructura del Proyecto
+
+```
+La-Elegancia-del-Coseno/
+├── app.py                      # Backend Flask con API REST
+├── requirements.txt            # Dependencias Python
+├── run.sh / run.bat           # Scripts de inicio
+├── README.md                   # Este archivo
+├── .gitignore                 # Archivos ignorados por git
+└── static/                    # Archivos frontend
+    ├── index.html             # Página principal (única página)
+    ├── css/
+    │   └── styles.css         # Estilos CSS vanilla
+    └── js/
+        └── main.js            # JavaScript para interactividad
+```
 
 ## 🚀 Características
 
