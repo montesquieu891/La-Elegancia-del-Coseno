@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Elegancia del Coseno</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Three.js for 3D visualization - Optional, will gracefully degrade if blocked -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" 
+            integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <header>
+        <h1>La Elegancia del Coseno</h1>
+        <p class="subtitle">De la geometría euclidiana a los LLMs modernos</p>
+        <nav>
+            <button class="nav-btn active" data-module="module1">Geometría</button>
+            <button class="nav-btn" data-module="module2">Matemática</button>
+            <button class="nav-btn" data-module="module3">Texto → Vectores</button>
+            <button class="nav-btn" data-module="module4">Embeddings</button>
+            <button class="nav-btn" data-module="module5">LLMs</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- MÓDULO 1: GEOMETRÍA INTUITIVA -->
+        <section id="module1" class="module active">
+            <h2>Módulo 1: Geometría Intuitiva</h2>
+            <p class="key-message">💡 El ángulo importa más que la distancia</p>
+            
+            <div class="module-content">
+                <div class="canvas-container">
+                    <h3>Canvas 2D Interactivo</h3>
+                    <p>Arrastra los puntos para cambiar los vectores</p>
+                    <canvas id="canvas2d" width="500" height="500"></canvas>
+                    <div class="info-panel">
+                        <div class="info-row">
+                            <span>Vector A:</span>
+                            <span id="vectorA">[ , ]</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Vector B:</span>
+                            <span id="vectorB">[ , ]</span>
+                        </div>
+                        <div class="info-row highlight">
+                            <span>Ángulo θ:</span>
+                            <span id="angle">0°</span>
+                        </div>
+                        <div class="info-row highlight">
+                            <span>Similitud Coseno:</span>
+                            <span id="cosineSim">1.00</span>
+                        </div>
+                        <div class="info-row">
+                            <span>Distancia Euclidiana:</span>
+                            <span id="euclidean">0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="canvas-container">
+                    <h3>Visualización 3D</h3>
+                    <p>Rota la vista para ver los vectores en el espacio</p>
+                    <div id="canvas3d"></div>
+                    <div class="controls">
+                        <button id="reset3d">Resetear Vista</button>
+                    </div>
+                </div>
+
+                <div class="comparison-panel">
+                    <h3>Comparación: Ángulo vs Distancia</h3>
+                    <p>Observa cómo vectores con la misma dirección pero diferentes magnitudes tienen alta similitud coseno</p>
+                    <div class="example-grid">
+                        <div class="example">
+                            <strong>Vectores paralelos</strong><br>
+                            A = [1, 1], B = [2, 2]<br>
+                            <span class="highlight">cos(θ) = 1.00</span> (misma dirección)<br>
+                            distancia = 1.41 (diferentes magnitudes)
+                        </div>
+                        <div class="example">
+                            <strong>Vectores perpendiculares</strong><br>
+                            A = [1, 0], B = [0, 1]<br>
+                            <span class="highlight">cos(θ) = 0.00</span> (90°)<br>
+                            distancia = 1.41 (misma que arriba!)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 2: MATEMÁTICA DESDE CERO -->
+        <section id="module2" class="module">
+            <h2>Módulo 2: Matemática desde Cero</h2>
+            <p class="key-message">💡 cos(θ) = (A·B) / (||A|| ||B||) funciona en cualquier dimensión</p>
+            
+            <div class="module-content">
+                <div class="calculator">
+                    <h3>Calculadora Paso a Paso</h3>
+                    <div class="input-group">
+                        <label>Vector A:</label>
+                        <input type="text" id="vecA" value="3, 4, 0" placeholder="x, y, z">
+                    </div>
+                    <div class="input-group">
+                        <label>Vector B:</label>
+                        <input type="text" id="vecB" value="4, 3, 0" placeholder="x, y, z">
+                    </div>
+                    <button id="calculate">Calcular</button>
+                    
+                    <div id="steps" class="steps-display"></div>
+                </div>
+
+                <div class="formula-breakdown">
+                    <h3>Construcción de la Fórmula</h3>
+                    <div class="formula-step">
+                        <strong>Paso 1: Producto Punto (A·B)</strong>
+                        <p>Multiplica componente por componente y suma:</p>
+                        <code>A·B = A₁×B₁ + A₂×B₂ + ... + Aₙ×Bₙ</code>
+                    </div>
+                    <div class="formula-step">
+                        <strong>Paso 2: Normas (||A|| y ||B||)</strong>
+                        <p>Calcula la longitud de cada vector:</p>
+                        <code>||A|| = √(A₁² + A₂² + ... + Aₙ²)</code>
+                    </div>
+                    <div class="formula-step">
+                        <strong>Paso 3: Coseno del Ángulo</strong>
+                        <p>Divide el producto punto por el producto de las normas:</p>
+                        <code>cos(θ) = (A·B) / (||A|| × ||B||)</code>
+                    </div>
+                    <div class="formula-step highlight">
+                        <strong>Resultado: Valor entre -1 y 1</strong>
+                        <ul>
+                            <li>1.0 = Misma dirección (θ = 0°)</li>
+                            <li>0.0 = Perpendiculares (θ = 90°)</li>
+                            <li>-1.0 = Direcciones opuestas (θ = 180°)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 3: TEXTO → VECTORES -->
+        <section id="module3" class="module">
+            <h2>Módulo 3: Texto → Vectores</h2>
+            <p class="key-message">💡 Las palabras son coordenadas en un espacio</p>
+            
+            <div class="module-content">
+                <div class="text-input">
+                    <h3>Ingresa Documentos</h3>
+                    <textarea id="doc1" placeholder="Documento 1">El perro juega en el parque</textarea>
+                    <textarea id="doc2" placeholder="Documento 2">El gato duerme en casa</textarea>
+                    <textarea id="doc3" placeholder="Documento 3">El perro y el gato son mascotas</textarea>
+                    <div class="button-group">
+                        <button id="analyzeBow">Analizar con BoW</button>
+                        <button id="analyzeTfidf">Analizar con TF-IDF</button>
+                        <button id="compareMethod">Comparar Ambos</button>
+                    </div>
+                </div>
+
+                <div id="vectorResults" class="results-display"></div>
+
+                <div id="heatmapContainer" class="heatmap-container">
+                    <h3>Mapa de Similitudes</h3>
+                    <canvas id="heatmap" width="400" height="400"></canvas>
+                    <div class="heatmap-legend">
+                        <span>0.0</span>
+                        <div class="gradient"></div>
+                        <span>1.0</span>
+                    </div>
+                </div>
+
+                <div id="comparisonResults" class="comparison-results"></div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 4: EMBEDDINGS SEMÁNTICOS -->
+        <section id="module4" class="module">
+            <h2>Módulo 4: Embeddings Semánticos</h2>
+            <p class="key-message">💡 Más dimensiones = más matices de significado</p>
+            
+            <div class="module-content">
+                <div class="embeddings-intro">
+                    <h3>Del Conteo a la Semántica</h3>
+                    <p>Los embeddings capturan significado, no solo frecuencia de palabras.</p>
+                    
+                    <div class="dimension-comparison">
+                        <div class="dim-card">
+                            <strong>Bag-of-Words</strong>
+                            <p>~12 dimensiones</p>
+                            <p>Solo palabras exactas</p>
+                        </div>
+                        <div class="dim-card">
+                            <strong>Word2Vec</strong>
+                            <p>~300 dimensiones</p>
+                            <p>Palabras similares</p>
+                        </div>
+                        <div class="dim-card">
+                            <strong>GPT Embeddings</strong>
+                            <p>~12,000 dimensiones</p>
+                            <p>Contexto completo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analogy-calculator">
+                    <h3>Calculadora de Analogías</h3>
+                    <p>Explora relaciones semánticas: rey - hombre + mujer = ?</p>
+                    <div class="analogy-input">
+                        <input type="text" id="analogyA" value="rey" placeholder="palabra 1">
+                        <span>-</span>
+                        <input type="text" id="analogyB" value="hombre" placeholder="palabra 2">
+                        <span>+</span>
+                        <input type="text" id="analogyC" value="mujer" placeholder="palabra 3">
+                        <span>=</span>
+                        <button id="calculateAnalogy">Calcular</button>
+                    </div>
+                    <div id="analogyResult" class="analogy-result">
+                        <p>Los embeddings permiten hacer aritmética con significados.</p>
+                        <p>Ejemplo: rey - hombre + mujer ≈ reina</p>
+                    </div>
+                </div>
+
+                <div class="embedding-visualization">
+                    <h3>Mapa 2D de Embeddings</h3>
+                    <p>Proyección de palabras relacionadas en un espacio 2D</p>
+                    <canvas id="embeddingMap" width="600" height="400"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- MÓDULO 5: CONEXIÓN CON LLMs -->
+        <section id="module5" class="module">
+            <h2>Módulo 5: Conexión con LLMs</h2>
+            <p class="key-message">💡 La misma geometría de 300 BCE funciona en 2024</p>
+            
+            <div class="module-content">
+                <div class="rag-demo">
+                    <h3>Búsqueda Semántica Simulada (RAG)</h3>
+                    <p>Cómo Claude y GPT encuentran información relevante</p>
+                    
+                    <div class="rag-input">
+                        <label>Tu consulta:</label>
+                        <input type="text" id="ragQuery" placeholder="¿Cómo funciona la fotosíntesis?">
+                        <button id="searchRag">Buscar</button>
+                    </div>
+
+                    <div id="ragResults" class="rag-results">
+                        <div class="rag-step">
+                            <strong>Paso 1: Query → Vector</strong>
+                            <p>Tu pregunta se convierte en un vector de embeddings</p>
+                        </div>
+                        <div class="rag-step">
+                            <strong>Paso 2: Calcular Similitud</strong>
+                            <p>Se compara con todos los documentos usando similitud coseno</p>
+                        </div>
+                        <div class="rag-step">
+                            <strong>Paso 3: Recuperar Más Relevantes</strong>
+                            <p>Los documentos con mayor similitud coseno se seleccionan</p>
+                        </div>
+                        <div class="rag-step">
+                            <strong>Paso 4: Generar Respuesta</strong>
+                            <p>El LLM usa esos documentos como contexto para responder</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <h3>Línea de Tiempo Histórica</h3>
+                    <div class="timeline-container">
+                        <div class="timeline-event">
+                            <strong>~300 BCE</strong>
+                            <p>Euclides - Geometría y ángulos</p>
+                        </div>
+                        <div class="timeline-event">
+                            <strong>1971</strong>
+                            <p>Gerard Salton - Vector Space Model</p>
+                        </div>
+                        <div class="timeline-event">
+                            <strong>2013</strong>
+                            <p>Mikolov - Word2Vec</p>
+                        </div>
+                        <div class="timeline-event">
+                            <strong>2017</strong>
+                            <p>Vaswani - Transformer Architecture</p>
+                        </div>
+                        <div class="timeline-event">
+                            <strong>2022-presente</strong>
+                            <p>GPT-4, Claude - LLMs modernos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="llm-connection">
+                    <h3>¿Cómo lo Usan los LLMs?</h3>
+                    <div class="use-cases">
+                        <div class="use-case">
+                            <strong>Búsqueda Semántica</strong>
+                            <p>Encontrar documentos relevantes por significado, no solo palabras clave</p>
+                        </div>
+                        <div class="use-case">
+                            <strong>Retrieval-Augmented Generation (RAG)</strong>
+                            <p>Combinar búsqueda + generación para respuestas informadas</p>
+                        </div>
+                        <div class="use-case">
+                            <strong>Similarity Matching</strong>
+                            <p>Detectar duplicados, plagios, o contenido relacionado</p>
+                        </div>
+                        <div class="use-case">
+                            <strong>Clustering</strong>
+                            <p>Agrupar documentos similares automáticamente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>La Elegancia del Coseno - Proyecto Educativo 2024</p>
+        <p>Geometría euclidiana + LLMs modernos = La misma matemática elegante</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
